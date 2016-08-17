@@ -1,0 +1,422 @@
+/*!
+ * Oldkingdom Dokuwiki Template
+ * Copyright 2016 Flawedspirit
+ * Licensed under GPL 2 (http://gnu.org/licenses/old-licenses/gpl-2.0.html)
+ */
+@font-face {
+    font-family: 'Web Symbols Liga';
+    src: url(fonts/websymbolsligaregular.ttf);
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+html, body {
+    background-color: __background_alt__;
+    background-image: url(images/site-background.png);
+    font-family: "Tahoma", "Geneva", sans-serif;
+    font-size: 10.5pt;
+    min-height: 100%;
+}
+a {
+    color: __text__;
+    text-decoration: none;
+}
+a.wikilink1,
+a.wikilink1:visited {
+    color: __link_exists__;
+}
+a.wikilink1:hover,
+a.wikilink1:focus,
+a.wikilink1:active {
+    text-decoration: underline;
+}
+a.wikilink2,
+a.wikilink2:visited {
+    color: __link_missing__;
+}
+a.wikilink2:hover,
+a.wikilink2:focus,
+a.wikilink2:active {
+    text-decoration: none;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: "El Messiri";
+    font-weight: 400;
+    overflow: hidden;
+}
+h1, h2, h3 {
+    margin: 1.75rem 0 1.25rem;
+}
+h4, h5, h6 {
+    margin: 1.25rem 0 0.75rem;
+}
+h1 {
+    border-bottom: 2px solid __border__;
+}
+input, button,
+.ui-buttonset label {
+    background-color: __background_neu__;
+    cursor: auto;
+    border: 1px solid __border__;
+    padding: 0.25rem 0.5rem;
+    margin-right: -1px;
+    resize: vertical;
+    vertical-align: middle;
+}
+input:hover,
+input:focus,
+input:active,
+button:hover,
+button:focus,
+button:active {
+    background-color: rgba(255, 255, 255, 0.35);
+}
+button.toolbutton {
+    vertical-align: middle;
+
+    img {
+        line-height: inherit;
+    }
+}
+div.picker {
+    background-color: __background_neu__;
+    font-family: "Lucida Console", Monaco, monospace;
+}
+pre {
+    @extend button;
+}
+pre.code {
+    border: 1px solid __border__;
+    border-radius: 0;
+    display: block;
+    padding: 0.25rem 0.5rem;
+}
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    border: 1px solid __border__;
+    margin-bottom: 1.5rem;
+
+    tr {
+        border-bottom: 1px solid __border__;
+    }
+    tr:hover {
+        background-color: rgba(255, 255, 255, 0.25);
+    }
+    th {
+        background-color: __background_neu__;
+    }
+    th, td {
+        border-right: 1px solid __border__;
+        padding: 0.25rem 0.5rem;
+    }
+}
+ul, ol {
+    list-style-position: inside;
+}
+#config__manager {
+    fieldset {
+        background-color: __background_neu__;
+        margin: 1rem 0;
+        overflow: hidden;
+
+        table {
+            tr {
+                display: table-row;
+                vertical-align: middle;
+
+                td {
+                    display: table-cell;
+                    border-right: none;
+                }
+                td.label {
+                    display: table-cell;
+                    line-height: inherit;
+                    padding: 0.5rem 0 0.5rem 0.5rem;
+
+                    img {
+                        display: inline-block;
+                        padding: 0 1rem 0 0;
+                        float: none;
+                    }
+                    label {
+                        color: __text__;
+                        display: inline-block;
+                        padding-right: 0;
+                        white-space: pre-wrap;
+                        vertical-align: middle;
+                    }
+                    span.outkey {
+                        background-color: __background__;
+                        color: __color__;
+                    }
+                }
+                td.value {
+                    input, select {
+                        color: __text__;
+                    }
+                    input[type=checkbox] {
+                        display: inline-block;
+                    }
+                }
+            }
+        }
+    }
+}
+#dokuwiki__detail {
+    background-color: __background__;
+    background-image: url(images/main-background.png);
+    border: none;
+}
+#dokuwiki__detail,
+.wiki-content {
+    border-top: 1px solid __border_light__;
+    border-bottom: 1px solid __border__;
+    padding-bottom: 1rem;
+}
+#dw__toc {
+    background-color: transparent;
+    font-size: 12pt;
+    margin: 0;
+    width: 100%;
+
+    h3, div {
+        padding: 0;
+    }
+}
+#dw__toc .toggle {
+    border: none;
+}
+#dokuwiki__top {
+    .container {
+        overflow: auto;
+    }
+}
+#extension__manager,
+#mediamanager__page,
+#extension__manager {
+    form {
+        .ui-buttonset {
+            input {
+                display: none;
+            }
+            label {
+                @extend button;
+                cursor: pointer;
+                margin: 0 0.5rem 0 0;
+            }
+            label:hover,
+            label:focus,
+            label:active {
+                @extend button:hover;
+            }
+        }
+        .ui-state-active {
+            background-color: __background_highlight__;
+            color: __text_alt__;
+        }
+    }
+    ul.tabs {
+        li {
+            cursor: pointer;
+
+            a {
+                background-color: __background_neu__;
+            }
+            strong {
+                background-color: __background_highlight__;
+                color: __text_alt__;
+            }
+        }
+        li.active {
+            a {
+                background-color: __background_highlight__;
+                color: __text_alt__;
+            }
+        }
+    }
+    .file {
+        dl {
+            dt {
+                background-color: transparent;
+            }
+        }
+    }
+    .filelist {
+        .panelContent {
+            ul {
+                li:hover {
+                    @extend button:hover;
+                }
+            }
+        }
+    }
+    .namespaces {
+        h2 {
+            background-color: __background_neu__;
+            margin: 0;
+        }
+        .panelHeader {
+            margin-top: -5px;
+        }
+    }
+    .panelHeader {
+        background-color: __background_neu__;
+        border-left: 1px solid __border__;
+        border-right: 1px solid __border__;
+        border-bottom: 1px solid __border__;
+        height: 50px;
+        line-height: 25px;
+
+        h3 {
+            line-height: 30px;
+        }
+    }
+    .panel {
+        background-color: transparent;
+        border-radius: 0;
+        box-shadow: none;
+    }
+}
+#extension__manager {
+    .panelHeader {
+        height: auto;
+    }
+}
+#media__content {
+    .odd {
+        background-color: __background_neu__;
+    }
+}
+#wiki-header {
+    margin-bottom: 0;
+
+    a {
+        color: __text__;
+    }
+    .bcbar-trace {
+        a.wikilink1,
+        a.wikilink2 {
+            color: __text_alt__;
+            font-weight: bold;
+            text-decoration: none;
+        }
+    }
+    .nav {
+        input, button {
+            @extend pre;
+        }
+        button:hover,
+        button:focus,
+        button:active {
+            @extend button:hover;
+        }
+        .dropdown-menu {
+            min-width: auto;
+
+            li > a,
+            .menu-item {
+                padding: 3px 20px;
+                white-space: nowrap;
+            }
+        }
+        .wiki-search {
+            margin-top: 20px;
+            text-align: center;
+        }
+    }
+    .navbar-brand {
+        cursor: pointer;
+        font-family: "El Messiri";
+        font-weight: 700;
+        font-size: x-large;
+        line-height: 1em;
+    }
+    .navbar-form {
+        border: none;
+        height: 50px;
+        padding: 10px 0;
+        margin: 0;
+        text-align: center;
+
+        .form-group {
+            input, button {
+                height: 30px;
+            }
+        }
+    }
+}
+#wiki-footer {
+    color: __text_neu__;
+
+    a {
+        color: __text_neu__;
+    }
+    .license {
+        text-align: center;
+    }
+}
+#wiki__text {
+    font-family: "Lucida Console", Monaco, monospace;
+    padding: 0.25rem;
+    resize: vertical;
+}
+.breadcrumb-bar {
+    background-color: __background_highlight__;
+    background-image: url(images/highlight.png), linear-gradient(to bottom, rgba(0,0,0,0.35) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0) 70%,rgba(0,0,0,0.35) 100%);
+    border-top: 1px solid __border__;
+    color: __text_alt__;
+    display: block;
+    line-height: 35px;
+    vertical-align: middle;
+}
+.container {
+    /* I have to use !important. This pains me. I am so sorry. */
+    width: __site_width__ !important;
+
+    .row {
+        padding: 10px 0;
+    }
+}
+.fix-toc {
+    position: fixed; top: 0;
+}
+.icon {
+    text-align: center;
+    display: inline-block;
+    font-family: 'Web Symbols Liga';
+    width: 1rem;
+}
+.manager-bg {
+    margin: 0;
+    min-height: 100vh;
+}
+.media {
+    margin: 0;
+}
+.medialeft {
+    margin-right: 1rem;
+}
+.mediaright {
+    margin-left: 1rem;
+}
+.mediacenter {
+    margin: 0 1rem;
+}
+.navbar-default {
+    @extend #dokuwiki__detail;
+    padding-bottom: 0;
+}
+.qq-upload-button:hover,
+.qq-upload-button:focus,
+.qq-upload-button:active {
+    @extend button:hover;
+}
+.wiki-content {
+    @extend #dokuwiki__detail;
+
+    input, button {
+        @extend pre;
+    }
+}
