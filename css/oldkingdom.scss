@@ -14,6 +14,7 @@
 html, body {
     background-color: __background_alt__;
     background-image: url(images/site-background.png);
+    box-sizing: border-box;
     font-family: "Tahoma", "Geneva", sans-serif;
     font-size: 10.5pt;
     min-height: 100%;
@@ -34,11 +35,14 @@ a.wikilink1:active {
 a.wikilink2,
 a.wikilink2:visited {
     color: __link_missing__;
+    border-bottom: 1px dashed;
+
 }
 a.wikilink2:hover,
 a.wikilink2:focus,
 a.wikilink2:active {
     text-decoration: none;
+    border-bottom: none;
 }
 h1, h2, h3, h4, h5, h6 {
     font-family: "El Messiri";
@@ -54,13 +58,13 @@ h4, h5, h6 {
 h1 {
     border-bottom: 2px solid __border__;
 }
-input, button,
+input,
+button,
 .ui-buttonset label {
     background-color: __background_neu__;
     cursor: auto;
     border: 1px solid __border__;
     padding: 0.25rem 0.5rem;
-    margin-right: -1px;
     resize: vertical;
     vertical-align: middle;
 }
@@ -70,7 +74,7 @@ input:active,
 button:hover,
 button:focus,
 button:active {
-    background-color: rgba(255, 255, 255, 0.35);
+    background-image: url(images/dummy-lighten.png);
 }
 button.toolbutton {
     vertical-align: middle;
@@ -78,6 +82,13 @@ button.toolbutton {
     img {
         line-height: inherit;
     }
+}
+code {
+    background: __background_alt__;
+    border: 1px solid __border__;
+    border-radius: 0;
+    color: __text_alt__;
+    white-space: nowrap;
 }
 div.picker {
     background-color: __background_neu__;
@@ -93,23 +104,27 @@ pre.code {
     padding: 0.25rem 0.5rem;
 }
 table {
+    background-color: __background__;
     border-spacing: 0;
     border-collapse: collapse;
     border: 1px solid __border__;
     margin-bottom: 1.5rem;
 
-    tr {
-        border-bottom: 1px solid __border__;
-    }
-    tr:hover {
-        background-color: rgba(255, 255, 255, 0.25);
-    }
     th {
         background-color: __background_neu__;
     }
     th, td {
         border-right: 1px solid __border__;
         padding: 0.25rem 0.5rem;
+    }
+    tr {
+        border-bottom: 1px solid __border__;
+    }
+    tr:nth-child(even) {
+        background-color: rgba(255, 255, 255, 0.25);
+    }
+    tr:hover {
+        @extend button:hover;
     }
 }
 ul, ol {
@@ -289,6 +304,9 @@ ul, ol {
         background-color: __background_neu__;
     }
 }
+#size__ctl {
+    @extend button;
+}
 #wiki-header {
     margin-bottom: 0;
 
@@ -321,6 +339,11 @@ ul, ol {
                 white-space: nowrap;
             }
         }
+        .dropdown-toggle:hover,
+        .dropdown-toggle:focus,
+        .dropdown-toggle:active {
+            @extend button:hover;
+        }
         .wiki-search {
             margin-top: 20px;
             text-align: center;
@@ -336,13 +359,16 @@ ul, ol {
     .navbar-form {
         border: none;
         height: 50px;
-        padding: 10px 0;
+        padding: 10px 0 10px 15px;
         margin: 0;
         text-align: center;
 
         .form-group {
             input, button {
                 height: 30px;
+            }
+            input {
+                border-right: none;
             }
         }
     }
@@ -358,6 +384,7 @@ ul, ol {
     }
 }
 #wiki__text {
+    border: 1px solid __border__;
     font-family: "Lucida Console", Monaco, monospace;
     padding: 0.25rem;
     resize: vertical;
