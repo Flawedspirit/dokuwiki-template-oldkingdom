@@ -8,11 +8,13 @@ var $toc    = jQuery("#dw__toc"),
     top     = 86;
 
 $window.scroll(function() {
-    if($window.scrollTop() > offset.top) {
-        $toc.addClass('fix-toc');
-        jQuery('#dw__toc').css('width', jQuery('.col-md-3').width() + 'px');
-    } else {
-        $toc.removeClass('fix-toc');
-        jQuery('#dw__toc').removeAttr('style');
+    if(typeof offset !== undefined ) {
+        if($window.scrollTop() > offset.top) {
+            $toc.addClass('fix-toc');
+            jQuery('#dw__toc').css('width', jQuery('.col-md-3').width() + 'px');
+        } else {
+            $toc.removeClass('fix-toc');
+            jQuery('#dw__toc').removeAttr('style');
+        }
     }
 });
