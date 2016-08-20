@@ -1,5 +1,5 @@
 base	 oldkingdom
 author   Flawedspirit
 email    flawedspirit@gmail.com
-date     2016-08-19
+date     2016-08-20
 name     Old Kingdom Wiki Template
