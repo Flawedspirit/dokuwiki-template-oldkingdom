@@ -3,3 +3,12 @@
         width: __site_width__;
     }
 }
+
+@media screen and (max-width: 479px) {
+    .medialeft,
+    .mediaright {
+        display: block;
+        float: none !important;
+        margin: 0 auto;
+    }
+}
