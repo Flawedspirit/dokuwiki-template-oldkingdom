@@ -202,8 +202,21 @@ ul, ol {
 }
 #dw__toc .toggle {
     border: none;
+
+    strong {
+        float: right;
+    }
 }
-#dokuwiki__top {
+#wiki-header,
+#dokuwiki__top,
+#wiki-footer {
+    .container {
+        .row {
+            padding: 10px 0;
+        }
+    }
+}
+#dokuwiki__top, {
     .container {
         overflow: auto;
     }
@@ -212,6 +225,8 @@ ul, ol {
 #mediamanager__page,
 #extension__manager {
     form {
+        margin: 0 auto;
+
         .ui-buttonset {
             input {
                 display: none;
@@ -310,15 +325,16 @@ ul, ol {
 #wiki-header {
     margin-bottom: 0;
 
-    a {
-        color: __text__;
-    }
-    .bcbar-trace {
-        a.wikilink1,
-        a.wikilink2 {
-            color: __text_alt__;
-            font-weight: bold;
-            text-decoration: none;
+    .container {
+        a {
+            color: __text__;
+        }
+        .bcbar-trace {
+            a {
+                color: __text_alt__;
+                font-weight: bold;
+                text-decoration: none;
+            }
         }
     }
     .nav {
@@ -398,14 +414,6 @@ ul, ol {
     line-height: 35px;
     vertical-align: middle;
 }
-.container {
-    /* I have to use !important. This pains me. I am so sorry. */
-    width: __site_width__ !important;
-
-    .row {
-        padding: 10px 0;
-    }
-}
 .fix-toc {
     position: fixed; top: 0;
 }
@@ -447,3 +455,5 @@ ul, ol {
         @extend pre;
     }
 }
+
+@import 'mobile';

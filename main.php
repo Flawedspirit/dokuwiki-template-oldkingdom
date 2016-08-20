@@ -92,12 +92,14 @@ if (!defined('DOKU_INC')) die();
                 </div>
             </div>
             <div id="wiki-bcbar" class="breadcrumb-bar">
-                <div class="container bcbar-trace">
-                    <?php if($conf['breadcrumbs']): ?>
-                        <?php tpl_breadcrumbs() ?>
-                    <?php elseif($conf['youarehere']): ?>
-                        <?php tpl_youarehere() ?>
-                    <?php endif ?>
+                <div class="container">
+                    <div class="bcbar-trace">
+                        <?php if($conf['breadcrumbs']): ?>
+                            <?php tpl_breadcrumbs() ?>
+                        <?php elseif($conf['youarehere']): ?>
+                            <?php tpl_youarehere() ?>
+                        <?php endif ?>
+                    </div>
                 </div>
             </div>
         </nav>
