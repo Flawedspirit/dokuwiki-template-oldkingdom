@@ -84,10 +84,9 @@ button.toolbutton {
     }
 }
 code {
-    background: __background_alt__;
+    background: __background_neu__;
     border: 1px solid __border__;
     border-radius: 0;
-    color: __text_alt__;
     white-space: nowrap;
 }
 div.picker {
@@ -227,6 +226,10 @@ ol ol {
     .container {
         overflow: auto;
     }
+}
+#draft__status {
+    color: __text__;
+    font-style: italic;
 }
 #extension__manager,
 #mediamanager__page,
