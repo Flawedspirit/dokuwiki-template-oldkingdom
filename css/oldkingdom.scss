@@ -130,6 +130,10 @@ table {
 ul, ol {
     list-style-position: inside;
 }
+ul ul,
+ol ol {
+    margin-left: 1.5rem;
+}
 #config__manager {
     fieldset {
         background-color: __background_neu__;
@@ -192,12 +196,15 @@ ul, ol {
 }
 #dw__toc {
     background-color: transparent;
-    font-size: 12pt;
+    font-size: 10.5pt;
     margin: 0;
     width: 100%;
 
     h3, div {
         padding: 0;
+    }
+    ul, ol {
+        list-style-type: none;
     }
 }
 #dw__toc .toggle {

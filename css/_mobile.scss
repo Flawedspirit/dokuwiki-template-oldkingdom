@@ -1,10 +1,12 @@
-@media screen and (min-width: 1200px), (min-width: 992px) {
+@media (min-width: 900px) {
     .container {
         width: __site_width__;
     }
 }
-
-@media screen and (max-width: 479px) {
+@media (max-width: 479px) {
+    html, body {
+        font-size: 12pt;
+    }
     .medialeft,
     .mediaright {
         display: block;
