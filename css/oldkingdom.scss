@@ -254,7 +254,22 @@ ol ol {
         }
         .ui-state-active {
             background-color: __background_highlight__;
-            color: __text_alt__;
+            color: __text__;
+        }
+    }
+    form.meta {
+        .row {
+            margin-left: 0;
+            margin-right: 0;
+
+            label {
+                width: 95%;
+
+                input.edit,
+                textarea.edit {
+                    width: inherit;
+                }
+            }
         }
     }
     ul.tabs {
