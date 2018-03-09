@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-lg drop-shadow-2">
+	<div class="container">
+		<a class="navbar-brand" href="/"><?php echo $conf['title']; ?></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar__main" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div id="navbar__main" class="collapse navbar-collapse">
+        	<div class="ml-auto">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="wiki_tools" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Wiki Tools</a>
+                        <div class="dropdown-menu" aria-labelledby="wiki_tools">
+                            <div class="dropdown-item">
+                                <ul class="list-unstyled">
+                                    <?php
+                                        tpl_toolsevent('pagetools', array(
+                                            'edit'      => tpl_action('edit', 1, 'li', 1),
+                                            'revisions' => tpl_action('revisions', 1, 'li', 1),
+                                            'backlink'  => tpl_action('backlink', 1, 'li', 1),
+                                            'subscribe' => tpl_action('subscribe', 1, 'li', 1),
+                                            'revert'    => tpl_action('revert', 1, 'li', 1)
+                                        ));
+                                    ?>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="user_tools" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</a>
+                        <div class="dropdown-menu" aria-labelledby="user_tools">
+                            <div class="dropdown-item">
+                                <ul class="list-unstyled">
+                                    <?php
+                                        if(!empty($_SERVER['REMOTE_USER'])) {
+                                            tpl_userinfo(); /* Logged in as... */
+                                            echo '<li class="divider"></li>';
+                                            tpl_toolsevent('usertools', array(
+                                                tpl_action('admin', 1, 'li', 1),
+                                                tpl_action('profile', 1, 'li', 1),
+                                                tpl_action('register', 1, 'li', 1),
+                                                tpl_action('login', 1, 'li', 1)
+                                            ));
+                                        } else {
+                                            tpl_toolsevent('usertools', array(
+                                                tpl_action('login', 1, 'li', 1)
+                                            ));
+                                        }
+                                    ?>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <?php tpl_searchform(); ?>
+                    </li>
+                </ul>
+        	</div>
+        </div>
+	</div>
+</nav>
