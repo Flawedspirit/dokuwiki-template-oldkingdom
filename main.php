@@ -21,8 +21,8 @@ header('X-UA-Compatible: IE=edge,chrome=1');
     <!-- Must be placed in header for things to work properly -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
     <?php tpl_metaheaders() ?>
-
     <?php tpl_includeFile('meta.html') ?>
+
     <?php echo tpl_favicon(array('favicon', 'mobile')) ?>
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -43,12 +43,12 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
             // render the content into buffer for later use
             ob_start();
-            tpl_content();
+            tpl_content(false);
             $buffer = ob_get_clean();
         ?>
 
+        <!-- -=== BREADCRUMB BAR ===- -->
         <div id="breadcrumb" class="separator-bar drop-shadow-2">
-            <!-- BREADCRUMBS -->
             <?php if($conf['breadcrumbs'] || $conf['youarehere']): ?>
                 <div class="container">
                     <?php if($conf['youarehere']): ?>
@@ -64,10 +64,24 @@ header('X-UA-Compatible: IE=edge,chrome=1');
         <!-- -=== CONTENT ===- -->
         <main role="main" class="drop-shadow-2">
             <div id="content" class="container py-3">
-                <?php echo $buffer; ?>
+                <div class="row">
+                    <?php if($conf['maxtoclevel'] > 0 && strlen(tpl_toc(true)) > 0): ?>
+                        <div class="col-md-3 pt-1">
+                            <?php echo tpl_toc(); ?>
+                        </div>
+                        <div class="col-md-9">
+                            <?php echo $buffer; ?>
+                        </div>
+                    <?php else: ?>
+                        <div class="col-md-12">
+                            <?php echo $buffer; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
             </div>
         </main>
 
+        <!-- -=== PAGE INFO ===- -->
         <div id="page_info" class="separator-bar drop-shadow-2">
             <div class="container">
                 <?php tpl_pageinfo(); ?>
@@ -77,11 +91,36 @@ header('X-UA-Compatible: IE=edge,chrome=1');
         <!-- -=== FOOTER ===- -->
         <footer id="dokuwiki__footer" class="container pt-3">
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-            <?php tpl_license('button'); ?>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <?php tpl_license(''); ?>
+                </div>
+            </div>
+
+            <?php if(tpl_getConf('showFooterButtons')): ?>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <?php
+                            tpl_license('button', true, false, false); // license button, no wrapper
+                            $target = ($conf['target']['extern']) ? 'target="' . $conf['target']['extern'] . '"' : '';
+                        ?>
+                        <a href="https://www.flawedspirit.com/donate" title="Donate to the author" <?php echo $target?>><img src="<?php echo tpl_basedir(); ?>images/button_flawedspirit.png" width="80" height="15" alt="Donate to the author" /></a>
+                        <a href="https://www.dokuwiki.org/donate" title="Donate to the Dokuwiki team" <?php echo $target?>><img src="<?php echo tpl_basedir(); ?>images/button_donate.gif" width="80" height="15" alt="Donate to the Dokuwiki team" /></a>
+                        <a href="https://secure.php.net" title="Powered by PHP" <?php echo $target?>><img src="<?php echo tpl_basedir(); ?>images/button_php.gif" width="80" height="15" alt="Powered by PHP" /></a>
+                        <a href="https://dokuwiki.org/" title="Driven by DokuWiki" <?php echo $target ?>><img src="<?php echo tpl_basedir(); ?>images/button_dw.png" width="80" height="15" alt="Driven by DokuWiki" /></a>
+                    </div>
+                </div>
+            <?php endif; ?>
         </footer>
 
         <?php tpl_includeFile('footer.html'); ?>
     </div>    
     <div class="no"><?php tpl_indexerWebBug(); ?></div>
+
+    <?php 
+        $out = sprintf('<script src="%s"></script>', tpl_basedir() . "js/fix-toc.js");
+
+        if(tpl_getConf('fixedToc')) echo $out;
+    ?>
 </body>
 </html>

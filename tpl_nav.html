@@ -1,9 +1,9 @@
-<nav class="navbar navbar-expand-lg drop-shadow-2">
+<nav class="navbar navbar-light navbar-expand-lg drop-shadow-2">
 	<div class="container">
 		<a class="navbar-brand" href="/"><?php echo $conf['title']; ?></a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar__main" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar__main" aria-controls="navbar__main" aria-expanded="false" aria-label="Toggle navigation">
+        	<span class="navbar-toggler-icon"></span>
+    	</button>
 
         <div id="navbar__main" class="collapse navbar-collapse">
         	<div class="ml-auto">
@@ -15,11 +15,14 @@
                                 <ul class="list-unstyled">
                                     <?php
                                         tpl_toolsevent('pagetools', array(
-                                            'edit'      => tpl_action('edit', 1, 'li', 1),
-                                            'revisions' => tpl_action('revisions', 1, 'li', 1),
-                                            'backlink'  => tpl_action('backlink', 1, 'li', 1),
-                                            'subscribe' => tpl_action('subscribe', 1, 'li', 1),
-                                            'revert'    => tpl_action('revert', 1, 'li', 1)
+                                            'edit'      => tpl_action('edit', 1, 'li', 1, '<span class="icon">&#0063;</span>'),
+                                            'revert'    => tpl_action('revert', 1, 'li', 1, '<span class="icon">&#0070;</span>'),
+                                            'revisions' => tpl_action('revisions', 1, 'li', 1, '<span class="icon">&#0089;</span>'),
+                                            'backlink'  => tpl_action('backlink', 1, 'li', 1, '<span class="icon">&#0111;</span>'),
+                                            'subscribe' => tpl_action('subscribe', 1, 'li', 1, '<span class="icon">&#0036;</span>'),
+                                            'recent'    => tpl_action('recent', 1, 'li', 1, '<span class="icon">&#0059;</span>'),
+                                            'media'     => tpl_action('media', 1, 'li', 1, '<span class="icon">&#0097;</span>'),
+                                            'index'     => tpl_action('index', 1, 'li', 1, '<span class="icon">&#0073;</span>')
                                         ));
                                     ?>
                                 </ul>
@@ -36,14 +39,14 @@
                                             tpl_userinfo(); /* Logged in as... */
                                             echo '<li class="divider"></li>';
                                             tpl_toolsevent('usertools', array(
-                                                tpl_action('admin', 1, 'li', 1),
-                                                tpl_action('profile', 1, 'li', 1),
-                                                tpl_action('register', 1, 'li', 1),
-                                                tpl_action('login', 1, 'li', 1)
+                                                tpl_action('admin', 1, 'li', 1, '<span class="icon">&#0094;</span>'),
+                                                tpl_action('profile', 1, 'li', 1, '<span class="icon">&#0046;</span>'),
+                                                tpl_action('register', 1, 'li', 1, '<span class="icon">&#0171;</span>'),
+                                                tpl_action('login', 1, 'li', 1, '<span class="icon">&#0119;</span>')
                                             ));
                                         } else {
                                             tpl_toolsevent('usertools', array(
-                                                tpl_action('login', 1, 'li', 1)
+                                                tpl_action('login', 1, 'li', 1, '<span class="icon">&#0118;</span>')
                                             ));
                                         }
                                     ?>
