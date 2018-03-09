@@ -1,164 +1,150 @@
 <?php
-
 /**
-* OLD KINGDOM TEMPLATE
-*
-* @link     https://flawedspirit.com
-* @author   Flawedspirit <flawedspirit@gmail.com>
-* @license  GPL 2 (http://gnu.org/licenses/old-licenses/gpl-2.0.html)
-*/
+ * DokuWiki Starter Template
+ *
+ * @link     http://dokuwiki.org/template:starter
+ * @author   Anika Henke <anika@selfthinker.org>
+ * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
+ */
 
-if (!defined('DOKU_INC')) die(); 
-?>
+if (!defined('DOKU_INC')) die();
+@require_once(dirname(__FILE__).'/tpl_functions.php');
+header('X-UA-Compatible: IE=edge,chrome=1');
+$showSidebar = page_findnearest($conf['sidebar']);
+?><!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $conf['lang'] ?>"
+  lang="<?php echo $conf['lang'] ?>" dir="<?php echo $lang['direction'] ?>" class="no-js">
+<head>
+    <meta charset="UTF-8" />
+    <title><?php tpl_pagetitle() ?> [<?php echo strip_tags($conf['title']) ?>]</title>
+    <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
+    <?php tpl_metaheaders() ?>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <?php echo tpl_favicon(array('favicon', 'mobile')) ?>
+    <?php tpl_includeFile('meta.html') ?>
+</head>
 
-<!DOCTYPE html>
-<html lang="en" dir="ltr" class="no-js">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <?php tpl_metaheaders() ?>
+<body id="dokuwiki__top">
+    <div id="dokuwiki__site" class="<?php echo tpl_classes(); ?> <?php echo ($showSidebar) ? 'hasSidebar' : ''; ?>">
+        <?php html_msgarea() ?>
+        <?php tpl_includeFile('header.html') ?>
 
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=El+Messiri:400,500,700" />
-        <?php echo tpl_favicon(array('favicon')) ?>
-        <?php tpl_includeFile('meta.html') ?>
-        <title><?php tpl_pagetitle() ?> &ndash; <?php echo hsc($conf['title']) ?></title>
-        <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
-    </head>
+        <!-- ********** HEADER ********** -->
+        <div id="dokuwiki__header"><div class="group">
 
-    <body>
-        <nav id="wiki-header" class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand hidden-sm hidden-xs" href="/"><?php echo $conf['title']; ?></a>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <?php if($conf['useacl']): ?>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Wiki Tools <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <?php
-                                        tpl_toolsevent('pagetools', array(
-                                            tpl_action('edit', true, 'li', true, '<span class="icon">&#0063;</span> ', ''),
-                                            tpl_action('revert', true, 'li', true, '<span class="icon">&#0170;</span> ', ''),
-                                            tpl_action('revisions', true, 'li', true, '<span class="icon">&#0089;</span> ', ''),
-                                            tpl_action('', true, 'li class="divider"', true),
-                                            tpl_action('backlink', true, 'li', true, '<span class="icon">&#0111;</span> ', ''),
-                                            tpl_action('subscribe', true, 'li', true, '<span class="icon">&#0036;</span> ', ''),
-                                            tpl_action('recent', true, 'li', true, '<span class="icon">&#0059;</span> ', ''),
-                                            tpl_action('media', true, 'li', true, '<span class="icon">&#0097;</span> ', ''),
-                                            tpl_action('index', true, 'li', true, '<span class="icon">&#0073;</span> ', '')
-                                        ));
-                                    ?>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Options <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <?php
-                                        if(!empty($_SERVER['REMOTE_USER'])) {
-                                            echo '<li class="menu-item">';
-                                            tpl_userinfo(); /* Logged in as... */
-                                            echo '</li>';
-                                            echo '<li class="divider"></li>';
-                                            tpl_toolsevent('usertools', array(
-                                                tpl_action('admin', true, 'li', true, '<span class="icon">&#0094;</span> ', ''),
-                                                tpl_action('profile', true, 'li', true, '<span class="icon">&#0046;</span> ', ''),
-                                                tpl_action('register', true, 'li', true, '<span class="icon">&#0171;</span> ', ''),
-                                                tpl_action('login', true, 'li', true, '<span class="icon">&#0119;</span> ', '')
-                                            ));
-                                        } else {
-                                            tpl_toolsevent('usertools', array(
-                                                tpl_action('login', true, 'li', true, '<span class="icon">&#0118;</span> ', '')
-                                            ));
-                                        }
-                                    ?>
-                                </ul>
-                            </li>
-                            <li class="navbar-form" role="search">
-                                <div class="form-group">
-                                    <?php tpl_searchform(); ?>
-                                </div>
-                            </li>
-                        </ul>
-                    <?php endif; ?>
-                </div>
-            </div>
-            <div id="wiki-bcbar" class="breadcrumb-bar">
-                <div class="container">
-                    <div class="bcbar-trace">
-                        <?php if($conf['breadcrumbs']): ?>
-                            <?php tpl_breadcrumbs() ?>
-                        <?php elseif($conf['youarehere']): ?>
-                            <?php tpl_youarehere() ?>
-                        <?php endif ?>
-                    </div>
-                </div>
-            </div>
-        </nav>
-        <div id="dokuwiki__top" class="site <?php echo tpl_classes() ?>">
-            <div class="wiki-content">
-                <div class="container">
-                    <div class="row">
-                        <?php
-                            // render the content into buffer for later use
-                            ob_start();
-                            html_msgarea();
-                            tpl_content(false);
-                            $buffer = ob_get_clean();
+            <h1><?php tpl_link(wl(),$conf['title'],'accesskey="h" title="[H]"') ?></h1>
+            <?php if ($conf['tagline']): ?>
+                <p class="claim"><?php echo $conf['tagline'] ?></p>
+            <?php endif ?>
 
-                        if($conf['maxtoclevel'] > 0 && strlen(tpl_toc(true)) > 0): ?>
-                            <div class="col-md-3 hidden-sm hidden-xs">
-                                <?php echo tpl_toc(); ?>
-                            </div>
-                            <div class="col-md-9">
-                                <?php echo $buffer; ?>
-                            </div>
-                        <?php else: ?>
-                            <div class="col-md-12 no-toc">
-                                <?php echo $buffer; ?>
-                            </div>
-                        <?php endif; ?>
-                    </div>
+            <p class="a11y skip">
+                <a href="#dokuwiki__content"><?php echo $lang['skip_to_content'] ?></a>
+            </p>
+
+            <!-- BREADCRUMBS -->
+            <?php if($conf['breadcrumbs']){ ?>
+                <div class="breadcrumbs"><?php tpl_breadcrumbs() ?></div>
+            <?php } ?>
+            <?php if($conf['youarehere']){ ?>
+                <div class="breadcrumbs"><?php tpl_youarehere() ?></div>
+            <?php } ?>
+
+            <hr />
+        </div></div><!-- /header -->
+
+
+        <div class="wrapper group">
+
+            <!-- ********** ASIDE ********** -->
+            <?php if ($showSidebar): ?>
+                <div id="dokuwiki__aside"><div class="aside include group">
+                    <?php tpl_includeFile('sidebarheader.html') ?>
+                    <?php tpl_include_page($conf['sidebar'], 1, 1) ?>
+                    <?php tpl_includeFile('sidebarfooter.html') ?>
+                    <hr class="a11y" />
+                </div></div><!-- /aside -->
+            <?php endif; ?>
+
+            <!-- ********** CONTENT ********** -->
+            <div id="dokuwiki__content"><div class="group">
+                <?php tpl_flush() ?>
+                <?php tpl_includeFile('pageheader.html') ?>
+
+                <div class="page group">
+                    <!-- wikipage start -->
+                    <?php tpl_content() ?>
+                    <!-- wikipage stop -->
                 </div>
-            </div>
-        </div>
-        <footer id="wiki-footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12"><?php tpl_pageinfo() ?><a class="hidden-xs" href="#" style="float: right;">Top of Page &uarr;</a></div>
+
+                <?php tpl_flush() ?>
+                <?php tpl_includeFile('pagefooter.html') ?>
+            </div></div><!-- /content -->
+
+        </div><!-- /wrapper -->
+
+        <!-- ********** FOOTER ********** -->
+        <div id="dokuwiki__footer">
+
+                <hr />
+                <div class="doc"><?php tpl_pageinfo() ?></div>
+            <div class="tools">
+                <!-- SITE TOOLS -->
+                <div id="dokuwiki__sitetools">
+                    <h3><?php echo $lang['site_tools'] ?></h3>
+                    <?php tpl_searchform() ?>
+                    <ul>
+                        <?php tpl_toolsevent('sitetools', array(
+                            'recent'    => tpl_action('recent', 1, 'li', 1),
+                            'media'     => tpl_action('media', 1, 'li', 1),
+                            'index'     => tpl_action('index', 1, 'li', 1),
+                        )); ?>
+                    </ul>
                 </div>
-                <div class="row">
-                    <div class="col-md-12"><?php tpl_license('') ?></div>
+
+                <!-- PAGE TOOLS -->
+                <div id="dokuwiki__pagetools">
+                    <h3><?php echo $lang['page_tools'] ?></h3>
+                    <ul>
+                        <?php tpl_toolsevent('pagetools', array(
+                            'edit'      => tpl_action('edit', 1, 'li', 1),
+                            'revisions' => tpl_action('revisions', 1, 'li', 1),
+                            'backlink'  => tpl_action('backlink', 1, 'li', 1),
+                            'subscribe' => tpl_action('subscribe', 1, 'li', 1),
+                            'revert'    => tpl_action('revert', 1, 'li', 1),
+                            'top'       => tpl_action('top', 1, 'li', 1),
+                        )); ?>
+                    </ul>
                 </div>
-                <?php if(tpl_getConf('showFooterButtons') > 0): ?>
-                    <div class="row">
-                        <div class="col-md-12 text-center">
+
+                <!-- USER TOOLS -->
+                <?php if ($conf['useacl']): ?>
+                    <div id="dokuwiki__usertools">
+                        <h3><?php echo $lang['user_tools'] ?></h3>
+                        <ul>
                             <?php
-                                tpl_license('button', true, false, false); // license button, no wrapper
-                                $target = ($conf['target']['extern']) ? 'target="' . $conf['target']['extern'] . '"' : '';
+                                if (!empty($_SERVER['REMOTE_USER'])) {
+                                    echo '<li class="user">';
+                                    tpl_userinfo();
+                                    echo '</li>';
+                                }
                             ?>
-                            <a href="https://www.flawedspirit.com/donate" title="Donate to the author" <?php echo $target?>><img src="<?php echo tpl_basedir(); ?>images/button-flawedspirit.png" width="80" height="15" alt="Donate to the author" /></a>
-                            <a href="https://www.dokuwiki.org/donate" title="Donate to the Dokuwiki team" <?php echo $target?>><img src="<?php echo tpl_basedir(); ?>images/button-donate.gif" width="80" height="15" alt="Donate to the Dokuwiki team" /></a>
-                            <a href="https://secure.php.net" title="Powered by PHP" <?php echo $target?>><img src="<?php echo tpl_basedir(); ?>images/button-php.gif" width="80" height="15" alt="Powered by PHP" /></a>
-                            <a href="https://dokuwiki.org/" title="Driven by DokuWiki" <?php echo $target ?>><img src="<?php echo tpl_basedir(); ?>images/button-dw.png" width="80" height="15" alt="Driven by DokuWiki" /></a>
-                        </div>
+                            <?php tpl_toolsevent('usertools', array(
+                                'admin'     => tpl_action('admin', 1, 'li', 1),
+                                'profile'   => tpl_action('profile', 1, 'li', 1),
+                                'register'  => tpl_action('register', 1, 'li', 1),
+                                'login'     => tpl_action('login', 1, 'li', 1),
+                            )); ?>
+                        </ul>
                     </div>
-                <?php endif; ?>
+                <?php endif ?>
             </div>
-        </footer>
-        <?php tpl_indexerWebBug(); ?>
-    </body>
-    <script type="text/javascript" src="<?php echo tpl_basedir(); ?>js/collapse.min.js"></script>
-    <script type="text/javascript" src="<?php echo tpl_basedir(); ?>js/dropdown.min.js"></script>
-    <script type="text/javascript" src="<?php echo tpl_basedir(); ?>js/ie10-viewport-bug-workaround.js"></script>
-    <script type="text/javascript" src="<?php echo tpl_basedir(); ?>js/main.js"></script>
-    <?php tpl_includeFile('footer.html'); ?>
+
+            <?php tpl_license('button') ?>
+        </div><!-- /footer -->
+
+        <?php tpl_includeFile('footer.html') ?>
+    </div><!-- /site -->
+
+    <div class="no"><?php tpl_indexerWebBug() /* provide DokuWiki housekeeping, required in all templates */ ?></div>
+</body>
 </html>
